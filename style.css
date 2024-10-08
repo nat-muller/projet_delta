@@ -1,42 +1,129 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Delta</title>
+    <link rel="stylesheet" href="style.css"> <!-- Pour ajouter du CSS plus tard -->
+    <style>
+        /* Style global */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-section {
-    padding: 20px;
-    margin: 20px;
-    background-color: white;
-    border-radius: 8px;
-}
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-}
+        /* Centrer l'image avec un ajustement responsive */
+        .center-img {
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 500px; /* Limite la taille maximale de l'image */
+            height: auto; /* Maintient les proportions de l'image */
+            border-radius: 8px; /* Ajoute des bords arrondis pour un effet stylé */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère pour du style */
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Responsive pour petits écrans */
+        @media (max-width: 600px) {
+            section {
+                width: 95%;
+                margin: 10px auto;
+            }
+
+            .center-img {
+                width: 90%; /* L'image prend plus de place sur les petits écrans */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur Projet Delta</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Image centrée -->
+    <section>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROymdO_wWafPrX_iQFz6605Q457G5iGvFjrw&s" alt="Image du projet" class="center-img">
+    </section>
+
+    <section id="about">
+        <h2>À propos</h2>
+        <p>Ce site est dédié à mon projet GitHub intitulé "Projet Delta".</p>
+    </section>
+
+    <section id="projects">
+        <h2>Projets</h2>
+        <p>Voici une liste de mes projets en cours :</p>
+        <ul>
+            <li>Projet 1</li>
+            <li>Projet 2</li>
+            <li>Projet 3</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Pour me contacter, envoyez-moi un email à <a href="mailto:natanael.muller26@gmail.com">email@example.com</a>.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Projet Delta</p>
+    </footer>
+</body>
+</html>
