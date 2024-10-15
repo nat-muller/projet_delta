@@ -1,59 +1,154 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet Delta</title>
-    <link rel="stylesheet" href="style.css"> <!-- Pour ajouter du CSS plus tard -->
-    <style>
-        /* Centrer l'image */
-        .center-img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%; /* Ajuste la taille si besoin */
+<html>
+ <head>
+  <title>
+   Product Card
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Bienvenue sur Projet Delta</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#projects">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+        .product-card {
+            width: 375px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-info h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .product-info p {
+            margin: 5px 0;
+            color: #888;
+        }
+        .product-info .location {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .product-info .location i {
+            margin-right: 5px;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+        }
+        .actions i {
+            font-size: 24px;
+            color: #888;
+        }
+        .actions i:hover {
+            color: #000;
+        }
+        .actions .dislike {
+            color: #ff5b5b;
+        }
+        .actions .like {
+            color: #50c878;
+        }
+        .actions .superlike {
+            color: #1e90ff;
+        }
+        .settings {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #888;
+            cursor: pointer;
+        }
+        .settings:hover {
+            color: #000;
+        }
+  </style>
+  <script>
+   let startX;
 
-    <!-- Image centrée -->
-    <section>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROymdO_wWafPrX_iQFz6605Q457G5iGvFjrw&s" alt="Image du projet" class="center-img">
-    </section>
+        function handleTouchStart(event) {
+            startX = event.touches[0].clientX;
+        }
 
-    <section id="about">
-        <h2>À propos</h2>
-        <p>Ce site est dédié à mon projet GitHub intitulé "Projet Delta".</p>
-    </section>
+        function handleTouchMove(event) {
+            if (!startX) {
+                return;
+            }
 
-    <section id="projects">
-        <h2>Projets</h2>
-        <p>Voici une liste de mes projets en cours :</p>
-        <ul>
-            <li>Projet 1</li>
-            <li>Projet 2</li>
-            <li>Projet 3</li>
-        </ul>
-    </section>
+            let currentX = event.touches[0].clientX;
+            let diffX = currentX - startX;
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Pour me contacter, envoyez-moi un email à <a href="mailto:natanael.muller26@gmail.com">email@example.com</a>.</p>
-    </section>
+            event.currentTarget.style.transform = `translateX(${diffX}px)`;
+        }
 
-    <footer>
-        <p>&copy; 2024 Projet Delta</p>
-    </footer>
-</body>
+        function handleTouchEnd(event) {
+            let diffX = event.changedTouches[0].clientX - startX;
+
+            if (diffX > 100) {
+                event.currentTarget.style.transform = 'translateX(1000px)';
+            } else if (diffX < -100) {
+                event.currentTarget.style.transform = 'translateX(-1000px)';
+            } else {
+                event.currentTarget.style.transform = 'translateX(0)';
+            }
+
+            startX = null;
+        }
+  </script>
+ </head>
+ <body>
+  <div class="product-card" ontouchend="handleTouchEnd(event)" ontouchmove="handleTouchMove(event)" ontouchstart="handleTouchStart(event)">
+   <div class="settings">
+    <i class="fas fa-cog">
+    </i>
+   </div>
+   <img alt="Product image of stylish shoes" height="500" src="https://storage.googleapis.com/a1aa/image/t3IVjGdJcNalP1KwwGbjKnLNzhXAu5H5rymvigb8XRvlzx5E.jpg" width="375"/>
+   <div class="product-info">
+    <h2>
+     Stylish Shoes
+    </h2>
+    <div class="location">
+     <i class="fas fa-store">
+     </i>
+     <p>
+      Available at Shoe Store
+     </p>
+    </div>
+    <div class="location">
+     <i class="fas fa-map-marker-alt">
+     </i>
+     <p>
+      1 mile away
+     </p>
+    </div>
+   </div>
+   <div class="actions">
+    <i class="fas fa-times-circle dislike">
+    </i>
+    <i class="fas fa-star superlike">
+    </i>
+    <i class="fas fa-heart like">
+    </i>
+   </div>
+  </div>
+ </body>
 </html>
