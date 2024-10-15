@@ -1,154 +1,212 @@
 <html>
  <head>
-  <title>
-   Product Card
-  </title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&amp;display=swap" rel="stylesheet"/>
   <style>
    body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
             height: 100vh;
-        }
-        .product-card {
-            width: 375px;
-            border-radius: 20px;
+            margin: 0;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
             overflow: hidden;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            max-width: 400px;
+            max-height: 700px;
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            background-color: white;
+            overflow: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
             transition: transform 0.3s ease;
         }
-        .product-card img {
+        .card img {
             width: 100%;
             height: auto;
+            flex-shrink: 0;
         }
-        .product-info {
-            padding: 20px;
+        .card-content {
+            padding: 15px;
+            flex-grow: 1;
         }
-        .product-info h2 {
+        .card-content h2 {
             margin: 0;
-            font-size: 24px;
+            font-size: 1.5em;
             font-weight: bold;
         }
-        .product-info p {
-            margin: 5px 0;
-            color: #888;
+        .card-content p {
+            margin: 10px 0;
+            color: #757575;
+            font-size: 0.9em;
         }
-        .product-info .location {
+        .card-content p i {
+            margin-right: 5px;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+            flex-shrink: 0;
+        }
+        .card-footer i {
+            font-size: 1.5em;
+            color: #757575;
+        }
+        .card-footer i:hover {
+            color: #000;
+        }
+        .settings-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
+            color: #757575;
+            cursor: pointer;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4a90e2;
+            font-family: 'Roboto', sans-serif;
             display: flex;
             align-items: center;
-            margin-top: 10px;
         }
-        .product-info .location i {
-            margin-right: 5px;
+        .logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
         }
         .actions {
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
-            background-color: #fff;
-            border-top: 1px solid #eee;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+            flex-shrink: 0;
         }
         .actions i {
-            font-size: 24px;
-            color: #888;
+            font-size: 1.5em;
+            color: #757575;
         }
         .actions i:hover {
             color: #000;
         }
-        .actions .dislike {
-            color: #ff5b5b;
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .actions .like {
-            color: #50c878;
+        .settings-panel h2 {
+            margin-top: 0;
         }
-        .actions .superlike {
-            color: #1e90ff;
+        .settings-panel label {
+            display: block;
+            margin: 10px 0 5px;
         }
-        .settings {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            color: #888;
+        .settings-panel input[type="text"],
+        .settings-panel input[type="number"],
+        .settings-panel select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .settings-panel button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        .settings:hover {
-            color: #000;
+        .settings-panel button:hover {
+            background-color: #357ab8;
         }
   </style>
-  <script>
-   let startX;
-
-        function handleTouchStart(event) {
-            startX = event.touches[0].clientX;
-        }
-
-        function handleTouchMove(event) {
-            if (!startX) {
-                return;
-            }
-
-            let currentX = event.touches[0].clientX;
-            let diffX = currentX - startX;
-
-            event.currentTarget.style.transform = `translateX(${diffX}px)`;
-        }
-
-        function handleTouchEnd(event) {
-            let diffX = event.changedTouches[0].clientX - startX;
-
-            if (diffX > 100) {
-                event.currentTarget.style.transform = 'translateX(1000px)';
-            } else if (diffX < -100) {
-                event.currentTarget.style.transform = 'translateX(-1000px)';
-            } else {
-                event.currentTarget.style.transform = 'translateX(0)';
-            }
-
-            startX = null;
-        }
-  </script>
  </head>
  <body>
-  <div class="product-card" ontouchend="handleTouchEnd(event)" ontouchmove="handleTouchMove(event)" ontouchstart="handleTouchStart(event)">
-   <div class="settings">
-    <i class="fas fa-cog">
+  <div class="card" id="card">
+   <div class="logo">
+    <img alt="DP Logo" height="30" src="https://storage.googleapis.com/a1aa/image/ebTRAxh1RmTqFShION1iCFNDTePoBH0otKkQtAcKCgb5XHnTA.jpg" width="30"/>
+   </div>
+   <i class="fas fa-cog settings-icon" id="settings-icon">
+   </i>
+   <img alt="Photo souvenir of a beach" src="https://storage.googleapis.com/a1aa/image/YcSfRuTr2bTGCKiBMcAGhsfu6zU7EMoE6DW7fUhu7jLXtOOnA.jpg"/>
+   <div class="actions">
+    <i class="fas fa-trash-alt" style="color: #ff6b6b;">
+    </i>
+    <i class="fas fa-bookmark" style="color: #4a90e2;">
+    </i>
+    <i class="fas fa-th-large" style="color: #4caf50;">
     </i>
    </div>
-   <img alt="Product image of stylish shoes" height="500" src="https://storage.googleapis.com/a1aa/image/t3IVjGdJcNalP1KwwGbjKnLNzhXAu5H5rymvigb8XRvlzx5E.jpg" width="375"/>
-   <div class="product-info">
+   <div class="card-content">
     <h2>
-     Stylish Shoes
+     12th March 2023
     </h2>
-    <div class="location">
-     <i class="fas fa-store">
-     </i>
-     <p>
-      Available at Shoe Store
-     </p>
-    </div>
-    <div class="location">
+    <p>
      <i class="fas fa-map-marker-alt">
      </i>
-     <p>
-      1 mile away
-     </p>
-    </div>
-   </div>
-   <div class="actions">
-    <i class="fas fa-times-circle dislike">
-    </i>
-    <i class="fas fa-star superlike">
-    </i>
-    <i class="fas fa-heart like">
-    </i>
+     Paris, France
+    </p>
+    <p>
+     <i class="fas fa-clone">
+     </i>
+     Exists multiple times in the device
+    </p>
    </div>
   </div>
+  <div class="settings-panel" id="settings-panel">
+   <h2>
+    Settings
+   </h2>
+   <label for="brightness">
+    Brightness
+   </label>
+   <input id="brightness" max="100" min="0" type="number" value="50"/>
+   <label for="contrast">
+    Contrast
+   </label>
+   <input id="contrast" max="100" min="0" type="number" value="50"/>
+   <label for="saturation">
+    Saturation
+   </label>
+   <input id="saturation" max="100" min="0" type="number" value="50"/>
+   <button id="close-settings">
+    Close
+   </button>
+  </div>
+  <script>
+   const settingsIcon = document.getElementById('settings-icon');
+        const settingsPanel = document.getElementById('settings-panel');
+        const closeSettingsButton = document.getElementById('close-settings');
+
+        settingsIcon.addEventListener('click', () => {
+            settingsPanel.style.right = '0';
+        });
+
+        closeSettingsButton.addEventListener('click', () => {
+            settingsPanel.style.right = '-300px';
+        });
+  </script>
  </body>
 </html>
