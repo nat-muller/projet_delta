@@ -70,6 +70,7 @@
         .card-footer i {
             font-size: 1.5em;
             color: #757575;
+            cursor: pointer;
         }
         .card-footer i:hover {
             color: #000;
@@ -109,6 +110,7 @@
         .actions i {
             font-size: 1.5em;
             color: #757575;
+            cursor: pointer;
         }
         .actions i:hover {
             color: #000;
@@ -185,25 +187,25 @@
    </div>
    <i class="fas fa-cog settings-icon" id="settings-icon">
    </i>
-   <img alt="Photo souvenir of a beach" src="https://storage.googleapis.com/a1aa/image/YcSfRuTr2bTGCKiBMcAGhsfu6zU7EMoE6DW7fUhu7jLXtOOnA.jpg"/>
+   <img alt="Photo of the Western Wall (Kotel) in Israel" id="photo" src="https://storage.googleapis.com/a1aa/image/kotel.jpg"/>
    <div class="actions">
     <i class="fas fa-trash-alt" style="color: #ff6b6b;">
     </i>
     <i class="fas fa-bookmark" style="color: #4a90e2;">
     </i>
-    <i class="fas fa-th-large" style="color: #4caf50;">
+    <i class="fas fa-th-large" style="color: #4caf50;" id="next-photo">
     </i>
    </div>
    <div class="card-content">
-    <h2>
+    <h2 id="photo-date">
      12th March 2023
     </h2>
-    <p>
+    <p id="photo-location">
      <i class="fas fa-map-marker-alt">
      </i>
      Paris, France
     </p>
-    <p>
+    <p id="photo-exists">
      <i class="fas fa-clone">
      </i>
      Exists multiple times in the device
@@ -251,6 +253,28 @@
         const closeSettingsIcon = document.getElementById('close-settings-icon');
         const overlay = document.getElementById('overlay');
         const card = document.getElementById('card');
+        const nextPhotoButton = document.getElementById('next-photo');
+        const photo = document.getElementById('photo');
+        const photoDate = document.getElementById('photo-date');
+        const photoLocation = document.getElementById('photo-location');
+        const photoExists = document.getElementById('photo-exists');
+
+        const photos = [
+            {
+                src: 'https://storage.googleapis.com/a1aa/image/YcSfRuTr2bTGCKiBMcAGhsfu6zU7EMoE6DW7fUhu7jLXtOOnA.jpg',
+                date: '12th March 2023',
+                location: 'Paris, France',
+                exists: 'Exists multiple times in the device'
+            },
+            {
+                src: 'https://storage.googleapis.com/a1aa/image/kotel.jpg',
+                date: '15th April 2023',
+                location: 'Jerusalem, Israel',
+                exists: 'Exists once in the device'
+            }
+        ];
+
+        let currentPhotoIndex = 0;
 
         settingsIcon.addEventListener('click', () => {
             settingsPanel.style.right = '0';
@@ -265,6 +289,19 @@
         overlay.addEventListener('click', () => {
             settingsPanel.style.right = '-150px';
             overlay.style.display = 'none';
+        });
+
+        nextPhotoButton.addEventListener('click', () => {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+            const nextPhoto = photos[currentPhotoIndex];
+            card.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                photo.src = nextPhoto.src;
+                photoDate.textContent = nextPhoto.date;
+                photoLocation.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${nextPhoto.location}`;
+                photoExists.innerHTML = `<i class="fas fa-clone"></i> ${nextPhoto.exists}`;
+                card.style.transform = 'translateX(0)';
+            }, 300);
         });
   </script>
  </body>
